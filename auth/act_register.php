@@ -1,11 +1,21 @@
 <?php
-// require_once $_SERVER['DOCUMENT_ROOT'] . '/duit/config/connect.php'; // local
-require_once $_SERVER['DOCUMENT_ROOT'] . '/config/connect.php'; // hosting
+require_once $_SERVER['DOCUMENT_ROOT'] . '/rt_pintar/config/connect.php'; // local
+// require_once $_SERVER['DOCUMENT_ROOT'] . '/config/connect.php'; // hosting
 
 // get data post
 $username = $_POST['username'];
 $password = $_POST['password'];
+$keygen_try = $_POST['keygen'];
 $register_time = date('Y-m-d H:i:s', strtotime($now));
+$date_now = date('Y-m-d', strtotime($now));
+
+// check keygen
+$status = checkKeygen($date_now, $keygen_try, $keygen);
+
+if ($status == 'STOP') {
+    echo json_encode(array('status' => 'keygen_failed'));
+    exit();
+}
 
 // check if username already exists
 $sql = "SELECT * FROM t_auth WHERE c_username = :username";

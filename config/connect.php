@@ -13,6 +13,15 @@ try {
     $connect = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
     $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $key = 'ATTR_ERRMODE_DATABASE';
+    $keygen = [
+        0 => ['AJYGT', 'VRTYH', 'PLKJU', 'QWERT', 'MNBVC', 'ASDFG', 'ZXCVB', 'TYUIO', 'GHJKL', 'BNMAS'],
+        1 => ['POIUY', 'LKJHG', 'EDCBA', 'TREWS', 'YUIOP', 'HGFDS', 'VCXZQ', 'MLOKI', 'NJHGB', 'KJHGF'],
+        2 => ['ERTYU', 'CVBNM', 'WSXZA', 'POKLM', 'QAZWS', 'XEDCR', 'VFRTG', 'BGYHU', 'NHJIU', 'MKOPO'],
+        3 => ['LOIKJ', 'UHYTG', 'BVFDE', 'SWQAZ', 'LKJUI', 'NMHGT', 'POLKJ', 'QASDC', 'ZXDFV', 'EDCXZ'],
+        4 => ['WSAQZ', 'RFVBG', 'TGBNH', 'YHNMJ', 'UJIKL', 'OLMNB', 'MKIJU', 'NHBGT', 'BGTFV', 'NHGVF'],
+        5 => ['JUIKO', 'LKOLP', 'MNHBG', 'YTGRF', 'VFCXZ', 'ZAQSW', 'XWEDC', 'FRTGB', 'MJKLO', 'WSEDR'],
+        6 => ['QYHTG', 'LPMKO', 'ZXSDC', 'VBRTG', 'NMJUI', 'YTGBN', 'WSXCZ', 'OLKJH', 'MKJUI', 'EDCZX']
+    ];
 } catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }
@@ -37,7 +46,20 @@ function base_path($path = null)
         return $base_path;
     }
 }
-// tes git lewat git dekstop
+
+// for keygen check
+function checkKeygen($date_now, $try_key, $keygen)
+{
+    // Convert date to day number (0 = Sunday, 6 = Saturday)
+    $day_number = date('w', strtotime($date_now));
+
+    // Check if the key exists in the correct day's array
+    if (in_array($try_key, $keygen[$day_number])) {
+        return 'PASS';
+    } else {
+        return 'STOP';
+    }
+}
 
 $hari = [
     'Sunday' => 'Minggu',

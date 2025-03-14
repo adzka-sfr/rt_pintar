@@ -1,14 +1,8 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/rt_pintar/config/connect.php'; // local
+require_once $_SERVER['DOCUMENT_ROOT'] . '/rt_pintar/config/check_cookie.php'; // local
 // require_once $_SERVER['DOCUMENT_ROOT'] . '/config/connect.php'; // hosting
-
-$user = require_once base_path('config/check_cookie.php');
-
-// If the user is already authenticated, redirect them to the dashboard
-if ($user) {
-    echo "<script>window.location='" . base_url('dashboard') . "';</script>";
-    exit();
-}
+// require_once $_SERVER['DOCUMENT_ROOT'] . '/config/check_cookie.php'; // hosting
 ?>
 <!DOCTYPE html>
 
@@ -26,10 +20,10 @@ if ($user) {
 <!-- beautify ignore:start -->
 <html
     lang="en"
-    class="light-style customizer-hide"
+    class="light-style layout-menu-fixed"
     dir="ltr"
     data-theme="theme-default"
-    data-assets-path="<?= base_url('assets'); ?>"
+    data-assets-path="<?= base_url('assets') ?>"
     data-template="vertical-menu-template-free">
 
 <head>
@@ -38,7 +32,7 @@ if ($user) {
         name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Login Basic - Pages | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Smart RT</title>
 
     <meta name="description" content="" />
 
@@ -64,8 +58,7 @@ if ($user) {
     <link rel="stylesheet" href="<?= base_url('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') ?>" />
 
     <!-- Page CSS -->
-    <!-- Page -->
-    <link rel="stylesheet" href="<?= base_url('assets/vendor/css/pages/page-auth.css') ?>" />
+
     <!-- Helpers -->
     <script src="<?= base_url('assets/vendor/js/helpers.js') ?>"></script>
 
@@ -75,41 +68,4 @@ if ($user) {
 </head>
 
 <body>
-    <!-- Content -->
-    <div class="container-xxl">
-        <div class="authentication-wrapper authentication-basic container-p-y">
-            <div class="authentication-inner">
-                <?php
-                if (empty($_GET['page'])) {
-                    $_GET['page'] = "login";
-                } else {
-                    include "content.php";
-                }
-                ?>
-            </div>
-        </div>
-    </div>
-    <!-- / Content -->
-
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="<?= base_url('assets/vendor/libs/jquery/jquery.js') ?>"></script>
-    <script src="<?= base_url('assets/vendor/libs/popper/popper.js') ?>"></script>
-    <script src="<?= base_url('assets/vendor/js/bootstrap.js') ?>"></script>
-    <script src="<?= base_url('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') ?>"></script>
-
-    <script src="<?= base_url('assets/vendor/js/menu.js') ?>"></script>
-    <!-- endbuild -->
-
-    <!-- Vendors JS -->
-
-    <!-- Main JS -->
-    <script src="<?= base_url('assets/js/main.js') ?>"></script>
-
-    <!-- Page JS -->
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-</body>
-
-</html>
+    
